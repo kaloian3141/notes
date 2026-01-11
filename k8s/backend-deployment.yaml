@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notes-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notes-backend
+  template:
+    metadata:
+      labels:
+        app: notes-backend
+    spec:
+      containers:
+      - name: backend
+        image: kaloian08/notes-backend:v1
+        ports:
+        - containerPort: 5000
+        env:
+        - name: MONGO_URL
+          value: "mongodb://notes-db-service:27017"
